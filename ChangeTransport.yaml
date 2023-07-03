@@ -1,0 +1,345 @@
+{
+  "swagger": "2.0",
+  "x-stoplight": {
+    "id": "oc2haichb29jc"
+  },
+  "info": {
+    "title": "ChangeTransport",
+    "version": "1.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/vehicles/v2/analog": {
+      "get": {
+        "summary": "/vehicles/v2/analog",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "vehicle_uuid": {
+                    "type": "string"
+                  },
+                  "client_uuid": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "object",
+                    "properties": {
+                      "uuid": {
+                        "type": "string"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "mark": {
+                    "type": "string"
+                  },
+                  "model": {
+                    "type": "string"
+                  },
+                  "grnz": {
+                    "type": "string"
+                  },
+                  "heavy_flag": {
+                    "type": "boolean"
+                  },
+                  "axles_count": {
+                    "type": "integer"
+                  },
+                  "axles": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "air_suspension": {
+                          "type": "boolean"
+                        },
+                        "retractable": {
+                          "type": "boolean"
+                        },
+                        "distance_to_next": {
+                          "type": "integer"
+                        },
+                        "pos": {
+                          "type": "integer"
+                        },
+                        "wheels": {
+                          "type": "integer"
+                        },
+                        "slope": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "Example 1": [
+                  {
+                    "vehicle_uuid": "e6ca0041-3ef6-4c75-a7f5-49c82806f477",
+                    "client_uuid": "c98f9698-9826-4ffa-9b6c-cbbe82b5fbb2",
+                    "type": {
+                      "uuid": "bbe872eb-e327-472a-abbe-25f272131fa1",
+                      "code": "saddle_truck",
+                      "name": "Седельный тягач"
+                    },
+                    "mark": "Sedel",
+                    "model": "Tyaga",
+                    "grnz": "Ф231ОР123",
+                    "heavy_flag": false,
+                    "axles_count": 2,
+                    "axles": [
+                      {
+                        "air_suspension": true,
+                        "retractable": false,
+                        "distance_to_next": 0,
+                        "pos": 2,
+                        "wheels": 2,
+                        "slope": 2
+                      },
+                      {
+                        "air_suspension": true,
+                        "retractable": false,
+                        "distance_to_next": 3,
+                        "pos": 1,
+                        "wheels": 2,
+                        "slope": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "operationId": "get-clients-changeVehicles",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "vehicle_uuid",
+            "description": "Уникальный идентификатор ТС",
+            "required": true
+          }
+        ],
+        "description": "Метод, возвращающий список транспортных аналогичных транспортных средств, средству, переданному в запросе. Аналогичными являются ТС, у которых равны:\n• Тип ТС\n• Масса без нагрузки (т)\n• Разрешенная макс.масса (т)\n• Высота платформы(м)\n• Длина(м)\n• Ширина(м)\n• Высота(м)\n• Кол-во осей\n• Расстояние между осями\n• Скатность (для всех осей)\n• Пневмоподвеска (для всех осей))"
+      },
+      "parameters": []
+    },
+    "/resolution/vehicles": {
+      "put": {
+        "summary": "",
+        "operationId": "put-resolution-vehicles",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "require_changes_vehicle": [
+                    {
+                      "uuid": "string",
+                      "status": "string",
+                      "deadline_date": "string",
+                      "ags": [
+                        {
+                          " previous_vehicle_uuid": "string",
+                          " new vehicle": "string"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "require_changes_vehicle": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "uuid": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "deadline_date": {
+                        "type": "string"
+                      },
+                      "changes_vehicle": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            " previous_vehicle_uuid": {
+                              "type": "string"
+                            },
+                            " new_vehicle": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            " previous_vehicle_uuid",
+                            " new_vehicle"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "uuid",
+                      "status",
+                      "deadline_date",
+                      "changes_vehicle"
+                    ]
+                  }
+                },
+                "": {
+                  "$ref": "#/definitions/User"
+                }
+              },
+              "required": [
+                "require_changes_vehicle"
+              ]
+            },
+            "examples": [
+              {
+                "require_changes_vehicle": [
+                  {
+                    "resolution_uuid": "string",
+                    "status": "string",
+                    "deadline_date": "string",
+                    "changes_vehicle": [
+                      {
+                        " previous_vehicle_uuid": "string",
+                        " new_vehicle": "string"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "vehicles_excluded": []
+                }
+              },
+              "properties": {
+                "vehicles_excluded": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "vehicle_uuid": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "examples": [
+              {
+                "vehicles_excluded": [
+                  {
+                    "vehicle_uuid": "string"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "description": ""
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "title": "User",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier for the given user."
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "example": "1997-10-31"
+        },
+        "emailVerified": {
+          "type": "boolean",
+          "description": "Set to true if the user's email has been verified."
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date that the user was created."
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "emailVerified"
+      ]
+    }
+  }
+}
